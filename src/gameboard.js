@@ -40,26 +40,37 @@ function gameboard() {
     };
 
     const recieveAttack = (x,y) => {
-        if (board[x][y] === 0 || board[x][y] === 'x') {
+        if (board[x][y] === 0 && !misses.includes([x,y])) {
             misses.push([x,y]);
             return false;
+        } else if (board[x][y].constructor === Object) {
+            board[x][y].hit();
+            return true;
         };
-
-        board[x][y].hit();
-        return true;
     };
 
     const allShipsSunk = () => {
         for (let row of board) {
             for (let i of row) {
-                if (i.constructor === Object && i.isSunk() === false) { return false };
+                if (i.constructor === Object && !i.isSunk()) { return false };
             };
         };
 
         return true;
     };
 
-    return { placeShip, recieveAttack, allShipsSunk, misses };
+    const recieveRandomAttack = () => {
+        const x = Math.floor(Math.random() * board.length);
+        const y = Math.floor(Math.random() * board.length);
+
+        while (misses.includes([x,y])) {
+            recieveRandomAttack()
+        };
+
+        recieveAttack(x,y);
+    };
+
+    return { placeShip, recieveAttack, allShipsSunk, misses, recieveRandomAttack };
 };
 
 export { gameboard };
