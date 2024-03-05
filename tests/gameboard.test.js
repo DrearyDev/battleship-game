@@ -47,3 +47,14 @@ test('Gameboard allShipsSunk method', () => {
 
     expect(board.allShipsSunk()).toBe(true);
 });
+
+test('Gameboard recieveRandomAttack method', () => {
+    //will always miss since no ships placed
+    const board = gameboard();
+
+    expect(board.misses.length).toBe(0);
+
+    board.recieveRandomAttack();
+
+    expect(board.misses.length).toBe(1);
+});
