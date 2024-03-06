@@ -67,7 +67,7 @@ function gameboard() {
             recieveRandomAttack()
         };
 
-        recieveAttack(x,y);
+        return recieveAttack(x,y);
     };
 
     return { placeShip, recieveAttack, allShipsSunk, misses, recieveRandomAttack };
