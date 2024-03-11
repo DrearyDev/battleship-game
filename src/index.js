@@ -4,6 +4,7 @@ Utility styles => style.css
 ---------------------------*/
 import './style.css';
 import './home.css';
+import './game.css';
 
 import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
