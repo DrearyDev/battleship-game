@@ -8,6 +8,12 @@ test('Gameboard placeShip method', () => {
     expect(board.allShipsSunk()).toBe(false);
 });
 
+test('Gameboard placeRandomShips method', () => {
+    const board = gameboard();
+    board.placeRandomShips();
+    expect(board.shipCords).not.toStrictEqual([]);
+})
+
 test('Gameboard shipCords array', () => {
     const board = gameboard();
     board.placeShip([[0,0]]);
