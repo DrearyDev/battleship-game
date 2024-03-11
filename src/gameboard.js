@@ -41,6 +41,56 @@ function gameboard() {
         };
     };
 
+    const placeRandomShips = () => {
+        const pieces = [4,3,3,2,2,2,1,1,1,1];
+        const piecesAmmount = 20;
+        let selected = null;
+        
+        while (shipCords.length !== piecesAmmount) {
+            const row = Math.floor(Math.random() * board.length);
+            const column = Math.floor(Math.random() * board.length);
+            
+            const options = {
+                up: [],
+                right: [],
+                down: [],
+                left: []
+            };
+
+            for (let i = 0; i < pieces[0]; i++) {
+                options.up.push([row-i, column]);
+                options.right.push([row, column+i]);
+                options.down.push([row+i, column]);
+                options.left.push([row, column-i]);
+            };
+
+            for (const option in options) {
+                for (const coord of options[option]) {
+                    if (coord[0] < 0 || coord[0] > 9 ||
+                        coord[1] < 0 || coord[1] > 9) {
+                        options[option] = [];
+                    };
+
+                    for (let shipCord of shipCords) {
+                        if (shipCord[0] === coord[0] &&
+                            shipCord[1] === coord[1]) {
+                            options[option] = []
+                        };
+                    };
+                };
+
+                if (options[option].length === pieces[0]) {
+                    selected = options[option];
+                };
+            };
+
+            if (selected) {
+                pieces.shift();
+                placeShip(selected);
+            };
+        };
+    };
+
     const recieveAttack = (x,y) => {
         if (board[x][y] === 0 && !misses.includes([x,y])) {
             misses.push([x,y]);
@@ -72,7 +122,7 @@ function gameboard() {
         return recieveAttack(x,y);
     };
 
-    return { placeShip, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack };
+    return { placeShip, placeRandomShips, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack };
 };
 
 export { gameboard };
