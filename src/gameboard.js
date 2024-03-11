@@ -17,6 +17,7 @@ misses = [
 --------------------------------------------*/
 
 function gameboard() {
+    const shipCords = [];
     const misses = [];
     const board = [
         [0,0,0,0,0,0,0,0,0,0],
@@ -36,6 +37,7 @@ function gameboard() {
 
         for (let coord of coords) {
             board[coord[0]][coord[1]] = ship;
+            shipCords.push(coord);
         };
     };
 
@@ -70,7 +72,7 @@ function gameboard() {
         return recieveAttack(x,y);
     };
 
-    return { placeShip, recieveAttack, allShipsSunk, misses, recieveRandomAttack };
+    return { placeShip, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack };
 };
 
 export { gameboard };
