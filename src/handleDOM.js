@@ -22,10 +22,28 @@ function createGrid() {
     body.appendChild(grid);
 };
 
+function createShips() {
+    const widths = [4,3,3,2,2,2,1,1,1,1];
+    const ships = document.createElement('div');
+    ships.classList.add('ships');
+    
+    for (let piece in widths) {
+        const ship = document.createElement('div');
+        ship.classList.add('ship');
+
+        ship.style.width = `${widths[piece] * 50}px`;
+
+        ships.appendChild(ship);
+    };
+
+    body.appendChild(ships);
+};
+
 function singlePlayer() {
     body.innerHTML = '';
     body.appendChild(header);
     createGrid();
+    createShips();
 };
 
 function doublePlayer() { // will work on this later
