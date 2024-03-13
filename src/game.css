@@ -1,4 +1,22 @@
 
+:root {
+  --GRID_WIDTH: calc(50px * 10);
+  --GRID_BG_COLOR: lightblue;
+  --GRID_BORDER: 1px solid black;
+
+  --SQUARE_WIDTH: 50px;
+  --SQUARE_HEIGHT: 50px;
+
+  --SHIP_HEIGHT: 50px;
+  --SHIP_BG_COLOR: #aaa;
+  --SHIP_DRAGGING_COLOR: #ccc;
+  --SHIP_BORDER: 2px solid navy;
+}
+
+* {
+  user-select: none;
+}
+
 body {
   flex-direction: column;
   gap: 50px;
@@ -7,24 +25,28 @@ body {
 .grid {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  background-color: lightblue;
-  border: 1px solid black;
+  background-color: var(--GRID_BG_COLOR);
+  border: var(--GRID_BORDER);
 }
 .square {
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
+  width: var(--SQUARE_WIDTH);
+  height: var(--SQUARE_HEIGHT);
+  border: var(--GRID_BORDER);
 }
 
 .ships {
-  width: 500px;
+  width: var(--GRID_WIDTH);
   flex-wrap: wrap;
   display: flex;
-  flex-direction: row;
   gap: 10px;
 }
 .ship {
-  height: 50px;
-  background-color: grey;
-  border: 1px solid black;
+  /* width determined in javascript */
+  height: var(--SHIP_HEIGHT);
+  background-color: var(--SHIP_BG_COLOR);
+  border: var(--SHIP_BORDER);
+  cursor: move;
+}
+.ship.dragging {
+  background-color: var(--SHIP_DRAGGING_COLOR);
 }
