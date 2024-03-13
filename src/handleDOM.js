@@ -30,7 +30,7 @@ function createShips() {
     for (let piece in widths) {
         const ship = document.createElement('div');
         ship.classList.add('ship');
-
+        ship.setAttribute('draggable', true);
         ship.style.width = `${widths[piece] * 50}px`;
 
         ships.appendChild(ship);
