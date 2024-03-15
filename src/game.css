@@ -50,3 +50,8 @@ body {
 .ship.dragging {
   background-color: var(--SHIP_DRAGGING_COLOR);
 }
+
+.buttons-container {
+  display: flex;
+  gap: 10px;
+}
