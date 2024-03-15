@@ -39,11 +39,34 @@ function createShips() {
     body.appendChild(ships);
 };
 
+function createOptionsButtons() {
+  const buttonsContainer = document.createElement('div');
+  buttonsContainer.classList.add('buttons-container');
+
+  const submitShips = document.createElement('button');
+  submitShips.classList.add('submit');
+  submitShips.innerText = 'Submit Ships';
+
+  const resetShips = document.createElement('button');
+  resetShips.classList.add('reset');
+  resetShips.innerText = 'Reset Ships';
+
+  const placeRandomly = document.createElement('button');
+  placeRandomly.classList.add('place-randomly');
+  placeRandomly.innerText = 'Place Ships Randomly';
+
+  body.appendChild(buttonsContainer);
+  buttonsContainer.appendChild(submitShips);
+  buttonsContainer.appendChild(resetShips);
+  buttonsContainer.appendChild(placeRandomly);
+};
+
 function singlePlayer() {
     body.innerHTML = '';
     body.appendChild(header);
     createGrid();
     createShips();
+    createOptionsButtons();
 };
 
 function doublePlayer() { // will work on this later
