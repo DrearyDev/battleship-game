@@ -28,7 +28,6 @@ body {
   grid-template-columns: repeat(10, 50px);
   grid-template-rows: repeat(10, 50px);
   display: grid;
-  background-color: var(--GRID_BG_COLOR);
   border: var(--GRID_BORDER);
   overflow: hidden;
 }
@@ -36,6 +35,8 @@ body {
   width: var(--SQUARE_WIDTH);
   height: var(--SQUARE_HEIGHT);
   border: var(--GRID_BORDER);
+  background-color: var(--GRID_BG_COLOR);
+  z-index: -1;
 }
 
 .ships {
