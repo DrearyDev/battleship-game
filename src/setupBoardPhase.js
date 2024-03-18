@@ -17,9 +17,7 @@ function setupBoardPhase() {
     });
   });
 
-  grid.innerHTML = '';
   grid.ships = new Set();
-
   grid.addEventListener('dragover', (e) => {//grid isnt zero indexed
     e.preventDefault();
 
@@ -51,9 +49,10 @@ function setupBoardPhase() {
 
   grid.addEventListener('dragend', (e) => {
     const shipsContainer = document.querySelector('.ships');
+    const ships = [...grid.children].filter(ship => ship.classList.contains('ship'));
     grid.ships = new Set();
 
-    [...grid.children].forEach(ship => {
+    [...ships].forEach(ship => {
       if (ship.style.borderColor === 'red') {
         ship.coords = [];
         ship.style.borderColor = 'navy';
@@ -73,9 +72,10 @@ function setupBoardPhase() {
   resetBtn.addEventListener('click', () => {
     console.log('reset');
     const shipsContainer = document.querySelector('.ships');
+    const ships = [...grid.children].filter(ship => ship.classList.contains('ship'));
     grid.ships = new Set();
     
-    [...grid.children].forEach(ship => {
+    [...ships].forEach(ship => {
       ship.coords = [];
       shipsContainer.appendChild(ship);
     });
