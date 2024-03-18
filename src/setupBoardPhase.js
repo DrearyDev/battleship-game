@@ -6,10 +6,17 @@ function setupBoardPhase() {
   
   const ships = document.querySelectorAll('.ship');
   const grid = document.querySelector('.grid');
+  grid.ships = new Set();
 
   ships.forEach(ship => {
     ship.addEventListener('dragstart', () => {
       ship.classList.add('dragging');
+
+      if (ship.coords) {
+        for (let i = 0; i < ship.coords.length; i++) {
+          grid.ships.delete(ship.coords[i].toString());
+        };
+      };
     });
 
     ship.addEventListener('dragend', () => {
@@ -17,7 +24,6 @@ function setupBoardPhase() {
     });
   });
 
-  grid.ships = new Set();
   grid.addEventListener('dragover', (e) => {//grid isnt zero indexed
     e.preventDefault();
 
