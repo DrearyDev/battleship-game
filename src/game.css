@@ -7,7 +7,6 @@
   --SQUARE_WIDTH: 50px;
   --SQUARE_HEIGHT: 50px;
 
-  --SHIP_HEIGHT: 50px;
   --SHIP_BG_COLOR: #aaa;
   --SHIP_DRAGGING_COLOR: #ccc;
   --SHIP_BORDER: 2px solid navy;
@@ -46,8 +45,6 @@ body {
   gap: 10px;
 }
 .ship {
-  /* width determined in javascript */
-  height: var(--SHIP_HEIGHT);
   background-color: var(--SHIP_BG_COLOR);
   border: var(--SHIP_BORDER);
   cursor: move;
