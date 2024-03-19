@@ -22,6 +22,17 @@ function setupBoardPhase() {
     ship.addEventListener('dragend', () => {
       ship.classList.remove('dragging');
     });
+
+    ship.addEventListener('click', () => {
+      const width = ship.style.width.slice(0,-2);
+      const height = ship.style.height.slice(0,-2);
+
+      if (width > 50 || height > 50) {
+        ship.style.height = `${width}px`;
+        ship.style.width = `${height}px`;
+      };
+
+    });
   });
 
   grid.addEventListener('dragover', (e) => {//grid isnt zero indexed
