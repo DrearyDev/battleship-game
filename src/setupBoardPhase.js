@@ -32,6 +32,27 @@ function setupBoardPhase() {
         ship.style.width = `${height}px`;
       };
 
+      if (ship.parentElement.classList.contains('grid')) {
+        if (width < height) {
+          for (let i = 1; i < ship.coords.length; i++) {
+            grid.ships.delete(ship.coords[i].toString());
+            ship.coords[i][1] = ship.coords[0][1];
+            ship.coords[i][0] = ship.coords[i][0] + i;
+          };
+        } else {
+          for (let i = 1; i < ship.coords.length; i++) {
+            grid.ships.delete(ship.coords[i].toString());
+            ship.coords[i][0] = ship.coords[0][0];
+            ship.coords[i][1] = ship.coords[i][1] + i;
+          };
+        };
+
+        for (let i = 1; i < ship.coords.length; i++) {
+          if (grid.ships.has(ship.coords[i].toString())) { ship.style.borderColor = 'red' };
+        };
+
+        calculateGridSet();
+      };
     });
   });
 
@@ -39,24 +60,42 @@ function setupBoardPhase() {
     e.preventDefault();
 
     if (e.target === grid) {
+      const ship = document.querySelector('.dragging');
       const rect = e.target.getBoundingClientRect();
+
       const row = Math.round((e.clientY - rect.top) / 50);
       const column = Math.round((e.clientX - rect.left) / 50);
-      const ship = document.querySelector('.dragging');
-      const squaresShipTakesUp = ship.style.width.slice(0,-2) / 50;
       ship.style.gridRow = row;
       ship.style.gridColumn = column;
 
+      const shipHeight = ship.style.height.slice(0,-2);
+      const shipWidth = ship.style.width.slice(0,-2);
+
       ship.coords = [];
 
-      for (let i = 0; i < squaresShipTakesUp; i++) {
-        ship.coords.push([row, column+i]);
+      if (+shipHeight > +shipWidth) {
+        let squaresShipTakesUp = +shipHeight / 50;
+
+        for (let i = 0; i < squaresShipTakesUp; i++) {
+          ship.coords.push([row+i, column]);
+        };
+      } else {
+        let squaresShipTakesUp = shipWidth / 50;
+
+        for (let i = 0; i < squaresShipTakesUp; i++) {
+          ship.coords.push([row, column+i]);
+        };
       };
 
       ship.style.borderColor = 'navy';
 
       for (let i = 0; i < ship.coords.length; i++) {
-        if (ship.coords[i][1] > 10 || ship.coords[i][1] < 1) { ship.style.borderColor = 'red' }
+        if (ship.coords[i][0] > 10 ||
+            ship.coords[i][0] < 1 ||
+            ship.coords[i][1] > 10 ||
+            ship.coords[i][1] < 1) {
+          ship.style.borderColor = 'red';
+        }
         else if (grid.ships.has(ship.coords[i].toString())) { ship.style.borderColor = 'red' }
       };
 
@@ -64,7 +103,7 @@ function setupBoardPhase() {
     };
   });
 
-  grid.addEventListener('dragend', (e) => {
+  function calculateGridSet() {
     const shipsContainer = document.querySelector('.ships');
     const ships = [...grid.children].filter(ship => ship.classList.contains('ship'));
     grid.ships = new Set();
@@ -80,7 +119,10 @@ function setupBoardPhase() {
         };
       };
     });
-  });
+
+    console.log(grid.ships);
+  };
+  grid.addEventListener('dragend', calculateGridSet);
 
   submitBtn.addEventListener('click', () => {
     console.log('submit');
