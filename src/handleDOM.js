@@ -23,15 +23,19 @@ function createGrid() {
 };
 
 function createShips() {
+    const square = document.querySelector('.square');
+    const squareWidth = getComputedStyle(square).getPropertyValue('--SQUARE_WIDTH').slice(0,-2);
+
     const widths = [4,3,3,2,2,2,1,1,1,1];
     const ships = document.createElement('div');
     ships.classList.add('ships');
-    
+
     for (let piece in widths) {
         const ship = document.createElement('div');
         ship.classList.add('ship');
         ship.setAttribute('draggable', true);
-        ship.style.width = `${widths[piece] * 50}px`;
+        ship.style.width = `${widths[piece] * squareWidth}px`;
+        ship.style.height = `${squareWidth}px`;
 
         ships.appendChild(ship);
     };
