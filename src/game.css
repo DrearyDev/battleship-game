@@ -17,6 +17,7 @@
 }
 
 body {
+  padding-top: 100px;
   flex-direction: column;
   gap: 50px;
 }
