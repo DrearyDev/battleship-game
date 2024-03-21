@@ -10,6 +10,9 @@ import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
 import { singlePlayer, doublePlayer } from './handleDOM.js';
+import { resetBoard } from './resetBtn.js';
+import { placeRandomly } from './placeRandomlyBtn.js';
+import { getSubmitedCoords } from './submitBtn.js';
 import { setupBoardPhase } from "./setupBoardPhase.js";
 
 const singleBtn = document.querySelector('#single');
@@ -18,5 +21,13 @@ const doubleBtn = document.querySelector('#double');
 singleBtn.addEventListener('click', () => {
   singlePlayer();
   setupBoardPhase();
+  const resetBtn = document.querySelector('.reset');
+  const placeRandomlyBtn = document.querySelector('.place-randomly');
+  const submitBtn = document.querySelector('.submit');
+
+  resetBtn.addEventListener('click', resetBoard);
+  placeRandomlyBtn.addEventListener('click', placeRandomly);
+  submitBtn.addEventListener('click', getSubmitedCoords);
+
 });
 doubleBtn.addEventListener('click', doublePlayer);
