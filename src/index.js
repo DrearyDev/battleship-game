@@ -24,10 +24,20 @@ singleBtn.addEventListener('click', () => {
   const resetBtn = document.querySelector('.reset');
   const placeRandomlyBtn = document.querySelector('.place-randomly');
   const submitBtn = document.querySelector('.submit');
-
   resetBtn.addEventListener('click', resetBoard);
   placeRandomlyBtn.addEventListener('click', placeRandomly);
-  submitBtn.addEventListener('click', getSubmitedCoords);
+
+  const playerOne = player();
+  const cpu = player();
+  cpu.playerBoard.placeRandomShips();
+
+  submitBtn.addEventListener('click', () => {
+    const submitedCoords = getSubmitedCoords();
+    for (let i = 0; i < submitedCoords.length; i++) {
+      submitedCoords[i] = submitedCoords[i].map(coord => [coord[0]-1, coord[1]-1]);
+      playerOne.playerBoard.placeShip(submitedCoords[i]);
+    };
+  });
 
 });
 doubleBtn.addEventListener('click', doublePlayer);
