@@ -29,7 +29,7 @@ function setupBoardPhase() {
       };
 
       if (ship.parentElement.classList.contains('grid')) {
-        if (width < height) {
+        if (+width > +height) {
           for (let i = 1; i < ship.coords.length; i++) {
             grid.ships.delete(ship.coords[i].toString());
             ship.coords[i][1] = ship.coords[0][1];
