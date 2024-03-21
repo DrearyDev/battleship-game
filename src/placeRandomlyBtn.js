@@ -56,14 +56,16 @@ function placeRandomly() {
     const coords = genCoords(squaresTakenUp);
     const direction = Object.keys(coords)[0];
 
-    ship.coords = coords[direction];
-
     if (direction === 'down' || direction === 'right') {
+      ship.coords = coords[direction];
       ship.style.gridRow = coords[direction][0][0];
       ship.style.gridColumn = coords[direction][0][1];
     } else {
-      ship.style.gridRow = coords[direction][squaresTakenUp-1][0];
-      ship.style.gridColumn = coords[direction][squaresTakenUp-1][1];
+      coords[direction] = coords[direction].reverse();
+      ship.coords = coords[direction];
+
+      ship.style.gridRow = coords[direction][0][0];
+      ship.style.gridColumn = coords[direction][0][1];
     };
 
     const height = ship.style.height.slice(0,-2);
