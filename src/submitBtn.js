@@ -9,7 +9,6 @@ function getSubmitedCoords() {
       allCoords.push(ship.coords);
     });
 
-    console.log(allCoords);
     return allCoords;
   };
 };
