@@ -22,7 +22,8 @@ body {
   gap: 50px;
 }
 
-.grid {
+.grid,
+.mini-grid {
   width: var(--GRID_WIDTH);
   height: var(--GRID_WIDTH);
   grid-template-columns: repeat(10, 50px);
@@ -31,7 +32,8 @@ body {
   border: var(--GRID_BORDER);
   overflow: hidden;
 }
-.square {
+.square,
+.mini-square {
   width: var(--SQUARE_WIDTH);
   height: var(--SQUARE_HEIGHT);
   border: var(--GRID_BORDER);
@@ -57,4 +59,15 @@ body {
 .buttons-container {
   display: flex;
   gap: 10px;
+}
+
+.mini-grid {
+  width: calc(var(--GRID_WIDTH) / 2 + 1px);
+  height: calc(var(--GRID_WIDTH) / 2 + 1px);
+  grid-template-columns: repeat(10, 25px);
+  grid-template-rows: repeat(10, 25px);
+}
+.mini-square {
+  width: calc(var(--SQUARE_HEIGHT) / 2);
+  height: calc(var(--SQUARE_HEIGHT) / 2);
 }
