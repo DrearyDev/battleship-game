@@ -65,6 +65,49 @@ function createOptionsButtons() {
   buttonsContainer.appendChild(placeRandomly);
 };
 
+function createMiniGrid() {
+  const miniGrid = document.createElement('div');
+  miniGrid.classList.add('mini-grid');
+
+  for (let i = 0; i < 10; i++) {
+    for (let k = 0; k < 10; k++) {
+      const div = document.createElement('div');
+      div.classList.add('mini-square');
+
+      miniGrid.appendChild(div);
+    };
+  };
+
+  body.appendChild(miniGrid);
+};
+
+function updateMiniGrid(playerBoard) {
+  const miniGrid = document.querySelector('.mini-grid');
+  const gridCords = playerBoard.shipCords.map(coords => [coords[0] + 1, coords[1] + 1]);
+
+  for (let i = 0; i < gridCords.length; i++) {
+    const div = document.createElement('div');
+    div.classList.add('mini-square');
+    div.style.backgroundColor = '#aaa';
+
+    div.style.gridRow = [gridCords[i][0]];
+    div.style.gridColumn = [gridCords[i][1]];
+
+    miniGrid.appendChild(div);
+  };
+
+  console.log(playerBoard.misses);
+  
+};
+
+function attackPhase(player) {
+  resetBody();
+  createGrid();
+  createMiniGrid();
+  updateMiniGrid(player.playerBoard);
+
+};
+
 function resetBody() {
   body.innerHTML = '';
   body.appendChild(header);
@@ -83,4 +126,4 @@ function doublePlayer() { // will work on this later
     // body.appendChild(header);
 };
 
-export { setupShips, doublePlayer };
+export { setupShips, doublePlayer, attackPhase };
