@@ -65,9 +65,13 @@ function createOptionsButtons() {
   buttonsContainer.appendChild(placeRandomly);
 };
 
-function singlePlayer() {
-    body.innerHTML = '';
-    body.appendChild(header);
+function resetBody() {
+  body.innerHTML = '';
+  body.appendChild(header);
+};
+
+function setupShips() {
+    resetBody();
     createGrid();
     createShips();
     createOptionsButtons();
@@ -79,4 +83,4 @@ function doublePlayer() { // will work on this later
     // body.appendChild(header);
 };
 
-export { singlePlayer, doublePlayer };
+export { setupShips, doublePlayer };

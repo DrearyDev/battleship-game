@@ -9,7 +9,7 @@ import './game.css';
 import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
-import { singlePlayer, doublePlayer } from './handleDOM.js';
+import { setupShips, doublePlayer } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
 import { submitCoords } from './submitBtn.js';
@@ -19,7 +19,7 @@ const singleBtn = document.querySelector('#single');
 const doubleBtn = document.querySelector('#double');
 
 singleBtn.addEventListener('click', () => {
-  singlePlayer();
+  setupShips();
   setupBoardPhase();
 
   const resetBtn = document.querySelector('.reset');
