@@ -13,4 +13,17 @@ function getSubmitedCoords() {
   };
 };
 
-export { getSubmitedCoords };
+function submitCoords(player) {
+  const submitedCoords = getSubmitedCoords();
+
+  if (submitedCoords) {
+    for (let i = 0; i < submitedCoords.length; i++) {
+      submitedCoords[i] = submitedCoords[i].map(coord => [coord[0]-1, coord[1]-1]);
+      player.playerBoard.placeShip(submitedCoords[i]);
+    };
+  } else {
+    console.log('not all ships placed validly');
+  };
+};
+
+export { submitCoords };

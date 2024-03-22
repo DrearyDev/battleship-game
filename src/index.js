@@ -12,7 +12,7 @@ import { player } from './player.js';
 import { singlePlayer, doublePlayer } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
-import { getSubmitedCoords } from './submitBtn.js';
+import { submitCoords } from './submitBtn.js';
 import { setupBoardPhase } from "./setupBoardPhase.js";
 
 const singleBtn = document.querySelector('#single');
@@ -21,23 +21,21 @@ const doubleBtn = document.querySelector('#double');
 singleBtn.addEventListener('click', () => {
   singlePlayer();
   setupBoardPhase();
+
   const resetBtn = document.querySelector('.reset');
   const placeRandomlyBtn = document.querySelector('.place-randomly');
   const submitBtn = document.querySelector('.submit');
-  resetBtn.addEventListener('click', resetBoard);
-  placeRandomlyBtn.addEventListener('click', placeRandomly);
 
   const playerOne = player();
   const cpu = player();
   cpu.playerBoard.placeRandomShips();
 
-  submitBtn.addEventListener('click', () => {
-    const submitedCoords = getSubmitedCoords();
-    for (let i = 0; i < submitedCoords.length; i++) {
-      submitedCoords[i] = submitedCoords[i].map(coord => [coord[0]-1, coord[1]-1]);
-      playerOne.playerBoard.placeShip(submitedCoords[i]);
-    };
-  });
+
+  resetBtn.addEventListener('click', resetBoard);
+  placeRandomlyBtn.addEventListener('click', placeRandomly);
+  submitBtn.addEventListener('click', () => submitCoords(playerOne));
+
+  console.log(cpu.playerBoard.shipCords);
 
 });
 doubleBtn.addEventListener('click', doublePlayer);
