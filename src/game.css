@@ -71,3 +71,7 @@ body {
   width: calc(var(--SQUARE_HEIGHT) / 2);
   height: calc(var(--SQUARE_HEIGHT) / 2);
 }
+.mini-ship {
+  background-color: var(--SHIP_BG_COLOR);
+  border: var(--GRID_BORDER);
+}
