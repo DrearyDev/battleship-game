@@ -116,12 +116,22 @@ function gameboard() {
     const recieveRandomAttack = () => {
         const x = Math.floor(Math.random() * board.length);
         const y = Math.floor(Math.random() * board.length);
+        let duplicate = null;
 
-        while (misses.includes([x,y])) {
-            recieveRandomAttack()
+        for (let i = 0; i < misses.length; i++) {
+            if (misses[i][0] === x && misses[i][1] === y) {
+                duplicate = true;
+            };
         };
 
-        return recieveAttack(x,y);
+        for (let i = 0; i < hits.length; i++) {
+            if (hits[i][0] === x && hits[i][1] === y) {
+                duplicate = true;
+            };
+        };
+
+        if (duplicate) { recieveRandomAttack() }
+        else { return recieveAttack(x,y) };
     };
 
     return { placeShip, placeRandomShips, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack, hits };
