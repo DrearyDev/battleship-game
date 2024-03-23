@@ -10,6 +10,8 @@
   --SHIP_BG_COLOR: #aaa;
   --SHIP_DRAGGING_COLOR: #ccc;
   --SHIP_BORDER: 2px solid navy;
+
+  --MISS_CROSS_COLOR: black;
 }
 
 * {
@@ -61,6 +63,31 @@ body {
   gap: 10px;
 }
 
+.miss {
+  width: var(--SQUARE_WIDTH);
+  height: var(--SQUARE_HEIGHT);
+  background-color: var(--GRID_BG_COLOR);
+  border: var(--GRID_BORDER);
+  position: relative;
+}
+.miss:before, .miss:after {
+  width: 100%;
+  height: 5px;
+  content: '';
+  margin: auto;
+  background-color: var(--MISS_CROSS_COLOR);
+
+  transform: rotate(-45deg);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.miss:after {
+  transform: rotate(45deg);
+}
+
 .mini-grid {
   width: calc(var(--GRID_WIDTH) / 2 + 1px);
   height: calc(var(--GRID_WIDTH) / 2 + 1px);
@@ -71,7 +98,13 @@ body {
   width: calc(var(--SQUARE_HEIGHT) / 2);
   height: calc(var(--SQUARE_HEIGHT) / 2);
 }
+
 .mini-ship {
   background-color: var(--SHIP_BG_COLOR);
   border: var(--GRID_BORDER);
+}
+
+.mini-grid > .miss {
+  width: calc(var(--SQUARE_HEIGHT) / 2);
+  height: calc(var(--SQUARE_HEIGHT) / 2);
 }
