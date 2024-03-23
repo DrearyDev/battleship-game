@@ -12,6 +12,7 @@
   --SHIP_BORDER: 2px solid navy;
 
   --MISS_CROSS_COLOR: black;
+  --HIT_CROSS_COLOR: red;
 }
 
 * {
@@ -63,14 +64,16 @@ body {
   gap: 10px;
 }
 
-.miss {
+.miss,
+.hit {
   width: var(--SQUARE_WIDTH);
   height: var(--SQUARE_HEIGHT);
   background-color: var(--GRID_BG_COLOR);
   border: var(--GRID_BORDER);
   position: relative;
 }
-.miss:before, .miss:after {
+.miss:before, .miss:after,
+.hit:before, .hit:after {
   width: 100%;
   height: 5px;
   content: '';
@@ -84,8 +87,13 @@ body {
   top: 0;
   bottom: 0;
 }
-.miss:after {
+.miss:after,
+.hit:after {
   transform: rotate(45deg);
+}
+
+.hit:before, .hit:after {
+  background-color: var(--HIT_CROSS_COLOR);
 }
 
 .mini-grid {
@@ -104,7 +112,11 @@ body {
   border: var(--GRID_BORDER);
 }
 
-.mini-grid > .miss {
+.mini-grid > .miss,
+.mini-grid > .hit {
   width: calc(var(--SQUARE_HEIGHT) / 2);
   height: calc(var(--SQUARE_HEIGHT) / 2);
+}
+.mini-grid > .hit {
+  background-color: transparent;
 }
