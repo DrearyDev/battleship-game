@@ -82,13 +82,16 @@ function createMiniGrid() {
 };
 
 function updateMiniGrid(playerBoard) {
+  playerBoard.recieveAttack(0,0);
+  playerBoard.recieveAttack(5,5);
+
   const miniGrid = document.querySelector('.mini-grid');
   const gridCords = playerBoard.shipCords.map(coords => [coords[0] + 1, coords[1] + 1]);
+  const misses = playerBoard.misses.map(coords => [coords[0] + 1, coords[1] + 1]);
 
   for (let i = 0; i < gridCords.length; i++) {
     const div = document.createElement('div');
-    div.classList.add('mini-square');
-    div.style.backgroundColor = '#aaa';
+    div.classList.add('mini-ship');
 
     div.style.gridRow = [gridCords[i][0]];
     div.style.gridColumn = [gridCords[i][1]];
@@ -97,6 +100,16 @@ function updateMiniGrid(playerBoard) {
   };
 
   console.log(playerBoard.misses);
+
+  for (let i = 0; i < misses.length; i++) {
+    const div = document.createElement('div');
+    div.classList.add('miss');
+
+    div.style.gridRow = [misses[i][0]];
+    div.style.gridColumn = [misses[i][1]];
+
+    miniGrid.appendChild(div);
+  };
   
 };
 
