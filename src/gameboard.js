@@ -17,6 +17,7 @@ misses = [
 --------------------------------------------*/
 
 function gameboard() {
+    const hits = [];
     const shipCords = [];
     const misses = [];
     const board = [
@@ -97,6 +98,7 @@ function gameboard() {
             return false;
         } else if (board[x][y].constructor === Object) {
             board[x][y].hit();
+            hits.push([x,y]);
             return true;
         };
     };
@@ -122,7 +124,7 @@ function gameboard() {
         return recieveAttack(x,y);
     };
 
-    return { placeShip, placeRandomShips, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack };
+    return { placeShip, placeRandomShips, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack, hits };
 };
 
 export { gameboard };
