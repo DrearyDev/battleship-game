@@ -82,8 +82,14 @@ function createMiniGrid() {
 };
 
 function updateMiniGrid(playerBoard) {
+  let shipCordsArr = [];
+
+  for (const entry of playerBoard.shipCords.entries()) {
+    shipCordsArr.push(entry[0].split(',').map(Number))
+  };
+
   const miniGrid = document.querySelector('.mini-grid');
-  const gridCords = playerBoard.shipCords.map(coords => [coords[0] + 1, coords[1] + 1]);
+  const gridCords = shipCordsArr.map(coords => [coords[0] + 1, coords[1] + 1]);
   const misses = playerBoard.misses.map(coords => [coords[0] + 1, coords[1] + 1]);
   const hits = playerBoard.hits.map(coords => [coords[0] + 1, coords[1] + 1]);
 
@@ -145,4 +151,4 @@ function doublePlayer() { // will work on this later
     // body.appendChild(header);
 };
 
-export { setupShips, doublePlayer, attackPhase };
+export { setupShips, doublePlayer, attackPhase, updateMiniGrid };
