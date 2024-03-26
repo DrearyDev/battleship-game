@@ -18,7 +18,7 @@ misses = [
 
 function gameboard() {
     const hits = [];
-    const shipCords = [];
+    const shipCords = new Set();
     const misses = [];
     const board = [
         [0,0,0,0,0,0,0,0,0,0],
@@ -38,7 +38,7 @@ function gameboard() {
 
         for (let coord of coords) {
             board[coord[0]][coord[1]] = ship;
-            shipCords.push(coord);
+            shipCords.add(coord.toString());
         };
     };
 
