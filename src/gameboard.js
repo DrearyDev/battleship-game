@@ -44,10 +44,9 @@ function gameboard() {
 
     const placeRandomShips = () => {
         const pieces = [4,3,3,2,2,2,1,1,1,1];
-        const piecesAmmount = 20;
         let selected = null;
         
-        while (shipCords.length !== piecesAmmount) {
+        while (pieces[0]) {
             const row = Math.floor(Math.random() * board.length);
             const column = Math.floor(Math.random() * board.length);
             
