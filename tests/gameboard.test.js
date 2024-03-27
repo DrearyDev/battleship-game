@@ -14,11 +14,13 @@ test('Gameboard placeRandomShips method', () => {
     expect(board.shipCords).not.toStrictEqual([]);
 })
 
-test('Gameboard shipCords array', () => {
+test('Gameboard shipCords set', () => {
     const board = gameboard();
     board.placeShip([[0,0]]);
 
-    expect(board.shipCords).toStrictEqual([[0,0]]);
+    for (const entry of board.shipCords) {
+        expect(entry).toStrictEqual("0,0");
+    };
 });
 
 test('Gameboard recieveAttack method', () => {
