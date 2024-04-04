@@ -44,9 +44,9 @@ function gameboard() {
 
     const placeRandomShips = () => {
         const pieces = [4,3,3,2,2,2,1,1,1,1];
-        let selected = null;
         
         while (pieces[0]) {
+            let selected = null;
             const row = Math.floor(Math.random() * board.length);
             const column = Math.floor(Math.random() * board.length);
             
@@ -71,11 +71,8 @@ function gameboard() {
                         options[option] = [];
                     };
 
-                    for (let shipCord of shipCords) {
-                        if (shipCord[0] === coord[0] &&
-                            shipCord[1] === coord[1]) {
-                            options[option] = []
-                        };
+                    if (shipCords.has(coord.toString())) {
+                        options[option] = [];
                     };
                 };
 
