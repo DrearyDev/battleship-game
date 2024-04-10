@@ -145,10 +145,34 @@ function setupShips() {
     createOptionsButtons();
 };
 
+function displayWinner(winner) {
+  const winnerMsg = document.createElement('div');
+  winnerMsg.classList.add('winner-msg');
+  const h2 = document.createElement('h2');
+  h2.innerText = 'Winner is:';
+  const h1 = document.createElement('h1');
+  h1.innerText = `${winner.name}!`;
+  winnerMsg.appendChild(h2);
+  winnerMsg.appendChild(h1);
+
+  const options = document.createElement('div');
+  options.classList.add('game-over-options');
+  const changeModeBtn = document.createElement('button');
+  changeModeBtn.innerText = 'Change Mode';
+  const playAgainBtn = document.createElement('button');
+  playAgainBtn.innerText = 'Play Again';
+  options.appendChild(changeModeBtn);
+  options.appendChild(playAgainBtn);
+
+  winnerMsg.appendChild(options);
+
+  body.insertBefore(winnerMsg, body.children[0]);
+};
+
 function doublePlayer() { // will work on this later
     body.style.backgroundColor = 'lightblue';
     // body.innerHTML = '';
     // body.appendChild(header);
 };
 
-export { setupShips, doublePlayer, attackPhase, updateMiniGrid };
+export { setupShips, doublePlayer, attackPhase, updateMiniGrid, displayWinner };
