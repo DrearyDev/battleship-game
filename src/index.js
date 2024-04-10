@@ -16,6 +16,7 @@ import { placeRandomly } from './placeRandomlyBtn.js';
 import { submitCoords } from './submitBtn.js';
 import { setupBoardPhase } from "./setupBoardPhase.js";
 
+let gamemode = null;
 const singleBtn = document.querySelector('#single');
 const doubleBtn = document.querySelector('#double');
 
@@ -44,6 +45,43 @@ function cpuAttack(player) {
   updateMiniGrid(player.playerBoard);
 };
 
+function changeMode() {
+  const body = document.querySelector('body');
+  const header = document.querySelector('.header');
+  body.innerHTML = ''
+  body.appendChild(header);
+
+  const btnContainer = document.createElement('div');
+  btnContainer.classList.add('btn-container');
+  const singleBtn = document.createElement('button');
+  singleBtn.id = 'single';
+  singleBtn.innerText = 'Single Player (vs CPU)';
+  const doubleBtn = document.createElement('button');
+  doubleBtn.id = 'double';
+  doubleBtn.innerText = 'Double Player (Local play)';
+
+  btnContainer.appendChild(singleBtn);
+  btnContainer.appendChild(doubleBtn);
+
+  body.appendChild(btnContainer);
+
+  singleBtn.addEventListener('click', singlePlayer);
+  doubleBtn.addEventListener('click', doublePlayer);
+};
+
+function playAgain(gamemode) {
+  const body = document.querySelector('body');
+  const header = document.querySelector('.header');
+  body.innerHTML = '';
+  body.appendChild(header);
+
+  if (gamemode === 'single') {
+    singlePlayer();
+  } else {
+    doublePlayer();
+  };
+};
+
 function checkForWinners(playerOne, playerTwo) {
   let winner = null;
 
@@ -55,6 +93,12 @@ function checkForWinners(playerOne, playerTwo) {
 
   if (winner) {
     displayWinner(winner);
+    const changeModeBtn = document.querySelector('.change-mode');
+    changeModeBtn.addEventListener('click', changeMode);
+    const playAgainBtn = document.querySelector('.play-again');
+    playAgainBtn.addEventListener('click', () => {
+      playAgain(gamemode);
+    });
   };
 };
 
@@ -72,7 +116,8 @@ function singleGameLoop(playerOne, playerTwo) {
   });
 };
 
-singleBtn.addEventListener('click', () => {
+function singlePlayer() {
+  gamemode = 'single';
   setupShips();
   setupBoardPhase();
 
@@ -81,7 +126,7 @@ singleBtn.addEventListener('click', () => {
   const submitBtn = document.querySelector('.submit');
 
   const playerOne = player();
-  playerOne.name = 'player one';
+  playerOne.name = 'player';
   const cpu = player();
   cpu.name = 'computer';
 
@@ -92,6 +137,7 @@ singleBtn.addEventListener('click', () => {
     cpu.playerBoard.placeRandomShips();
     singleGameLoop(playerOne, cpu);
   });
+};
 
-});
+singleBtn.addEventListener('click', singlePlayer);
 doubleBtn.addEventListener('click', doublePlayer);
