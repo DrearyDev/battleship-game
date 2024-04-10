@@ -10,6 +10,7 @@ import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
 import { setupShips, doublePlayer, attackPhase, updateMiniGrid } from './handleDOM.js';
+import { displayWinner } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
 import { submitCoords } from './submitBtn.js';
@@ -53,7 +54,7 @@ function checkForWinners(playerOne, playerTwo) {
   };
 
   if (winner) {
-    console.log(winner.name);
+    displayWinner(winner);
   };
 };
 
