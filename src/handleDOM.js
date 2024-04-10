@@ -158,8 +158,10 @@ function displayWinner(winner) {
   const options = document.createElement('div');
   options.classList.add('game-over-options');
   const changeModeBtn = document.createElement('button');
+  changeModeBtn.classList.add('change-mode');
   changeModeBtn.innerText = 'Change Mode';
   const playAgainBtn = document.createElement('button');
+  playAgainBtn.classList.add('play-again');
   playAgainBtn.innerText = 'Play Again';
   options.appendChild(changeModeBtn);
   options.appendChild(playAgainBtn);
