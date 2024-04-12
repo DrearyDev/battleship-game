@@ -9,7 +9,7 @@ import './game.css';
 import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
-import { setupShips, doublePlayer, attackPhase, updateMiniGrid } from './handleDOM.js';
+import { setupShips, attackPhase, updateMiniGrid } from './handleDOM.js';
 import { displayWinner } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
@@ -17,6 +17,7 @@ import { submitCoords } from './submitBtn.js';
 import { setupBoardPhase } from "./setupBoardPhase.js";
 
 let gamemode = null;
+let activePlayer = null;
 const singleBtn = document.querySelector('#single');
 const doubleBtn = document.querySelector('#double');
 
@@ -129,22 +130,57 @@ function singlePlayer() {
   setupShips();
   setupBoardPhase();
 
+  const resetbtn = document.queryselector('.reset');
+  const placerandomlybtn = document.queryselector('.place-randomly');
+  const submitbtn = document.queryselector('.submit');
+
+  const playerone = player();
+  playerone.name = 'player';
+  const cpu = player();
+  cpu.name = 'computer';
+
+  resetbtn.addeventlistener('click', resetboard);
+  placerandomlybtn.addeventlistener('click', placerandomly);
+  submitbtn.addeventlistener('click', () => {
+    submitcoords(playerone);
+    cpu.playerboard.placerandomships();
+    singlegameloop(playerone, cpu);
+  });
+};
+
+function doublePlayer() {
+  gamemode = 'double';
+  setupShips();
+  setupBoardPhase();
+
   const resetBtn = document.querySelector('.reset');
   const placeRandomlyBtn = document.querySelector('.place-randomly');
   const submitBtn = document.querySelector('.submit');
 
   const playerOne = player();
-  playerOne.name = 'player';
-  const cpu = player();
-  cpu.name = 'computer';
+  playerOne.name = 'Player One';
+  const playerTwo = player();
+  playerTwo.name = 'Player Two';
+
+  activePlayer = playerOne;
 
   resetBtn.addEventListener('click', resetBoard);
   placeRandomlyBtn.addEventListener('click', placeRandomly);
   submitBtn.addEventListener('click', () => {
-    submitCoords(playerOne);
-    cpu.playerBoard.placeRandomShips();
-    singleGameLoop(playerOne, cpu);
+    submitCoords(activePlayer);
+
+    if (activePlayer === playerOne) {
+      resetBoard();
+      activePlayer = playerTwo;
+    } else {
+      activePlayer = playerOne;
+      doubleGameLoop();
+    };
   });
+};
+
+function doubleGameLoop() {
+  console.log('start game');
 };
 
 singleBtn.addEventListener('click', singlePlayer);
