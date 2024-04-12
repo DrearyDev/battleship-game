@@ -99,6 +99,19 @@ function checkForWinners(playerOne, playerTwo) {
     playAgainBtn.addEventListener('click', () => {
       playAgain(gamemode);
     });
+
+    const grid = document.querySelector('.grid');
+    grid.removeEventListener('click', gridClicked);
+  };
+};
+
+function gridClicked(e, playerOne, playerTwo) {
+  const grid = document.querySelector('.grid');
+
+  if (e.target === grid) {
+    playerAttack(e, grid.playerTwo);
+    cpuAttack(grid.playerOne);
+    checkForWinners(grid.playerOne, grid.playerTwo);
   };
 };
 
@@ -106,14 +119,9 @@ function singleGameLoop(playerOne, playerTwo) {
   attackPhase(playerOne);
 
   const grid = document.querySelector('.grid');
-
-  grid.addEventListener('click', (e) => {
-    if (e.target === grid) {
-      playerAttack(e, playerTwo);
-      cpuAttack(playerOne);
-      checkForWinners(playerOne, playerTwo);
-    };
-  });
+  grid.playerOne = playerOne;
+  grid.playerTwo = playerTwo;
+  grid.addEventListener('click', gridClicked);
 };
 
 function singlePlayer() {
