@@ -41,7 +41,7 @@ function playerAttack(e, defendingPlayer) {
 };
 
 function cpuAttack(player) {
-  player.playerBoard.recieveRandomAttack();
+  player.playerBoard.recieveSmartAttack();
   updateMiniGrid(player.playerBoard);
 };
 
