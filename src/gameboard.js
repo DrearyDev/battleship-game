@@ -130,7 +130,49 @@ function gameboard() {
         else { return recieveAttack(x,y) };
     };
 
-    return { placeShip, placeRandomShips, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack, hits };
+    const recieveSmartAttack = () => {
+      let selected = null;
+
+      for (const hit of hits) {
+        const options = {
+          up: [hit[0] - 1, hit[1]],
+          down: [hit[0] + 1, hit[1]],
+          left: [hit[0], hit[1] - 1],
+          right: [hit[0], hit[1] + 1]
+        };
+
+        for (const option in options) {
+          if (options[option][0] < 0 || options[option][0] > 9 ||
+              options[option][1] < 0 || options[option][1] > 9) {
+
+            delete options[option];
+          };
+        };
+
+        for (const option in options) {
+          for (const miss of misses) {
+            if (miss[0] === options[option][0] && miss[1] === options[option][1]) {
+              options[option] = [];
+            };
+          };
+
+          for (const hit of hits) {
+            if (hit[0] === options[option][0] && hit[1] === options[option][1]) {
+              options[option] = [];
+            };
+          };
+
+          if (options[option].length > 0) {
+            selected = options[option];
+          };
+        };
+      };
+
+      if (selected) { recieveAttack(selected[0], selected[1]) }
+      else { recieveRandomAttack() };
+    };
+
+    return { placeShip, placeRandomShips, shipCords, recieveAttack, allShipsSunk, misses, recieveRandomAttack, hits, recieveSmartAttack };
 };
 
 export { gameboard };
