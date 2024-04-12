@@ -171,10 +171,4 @@ function displayWinner(winner) {
   body.insertBefore(winnerMsg, body.children[0]);
 };
 
-function doublePlayer() { // will work on this later
-    body.style.backgroundColor = 'lightblue';
-    // body.innerHTML = '';
-    // body.appendChild(header);
-};
-
-export { setupShips, doublePlayer, attackPhase, updateMiniGrid, displayWinner };
+export { setupShips, attackPhase, updateMiniGrid, displayWinner };
