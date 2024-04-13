@@ -9,8 +9,7 @@ import './game.css';
 import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
-import { setupShips, attackPhase, updateMiniGrid } from './handleDOM.js';
-import { displayWinner } from './handleDOM.js';
+import { setupShips, attackPhase, updateMiniGrid, displayWinner } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
 import { submitCoords } from './submitBtn.js';
@@ -130,21 +129,21 @@ function singlePlayer() {
   setupShips();
   setupBoardPhase();
 
-  const resetbtn = document.queryselector('.reset');
-  const placerandomlybtn = document.queryselector('.place-randomly');
-  const submitbtn = document.queryselector('.submit');
+  const resetBtn = document.querySelector('.reset');
+  const placeRandomlyBtn = document.querySelector('.place-randomly');
+  const submitBtn = document.querySelector('.submit');
 
-  const playerone = player();
-  playerone.name = 'player';
+  const playerOne = player();
+  playerOne.name = 'player';
   const cpu = player();
   cpu.name = 'computer';
 
-  resetbtn.addeventlistener('click', resetboard);
-  placerandomlybtn.addeventlistener('click', placerandomly);
-  submitbtn.addeventlistener('click', () => {
-    submitcoords(playerone);
-    cpu.playerboard.placerandomships();
-    singlegameloop(playerone, cpu);
+  resetBtn.addEventListener('click', resetBoard);
+  placeRandomlyBtn.addEventListener('click', placeRandomly);
+  submitBtn.addEventListener('click', () => {
+    submitCoords(playerOne);
+    cpu.playerBoard.placeRandomShips();
+    singleGameLoop(playerOne, cpu);
   });
 };
 
@@ -174,13 +173,13 @@ function doublePlayer() {
       activePlayer = playerTwo;
     } else {
       activePlayer = playerOne;
-      doubleGameLoop();
+      doubleGameLoop(playerOne, playerTwo);
     };
   });
 };
 
-function doubleGameLoop() {
-  console.log('start game');
+function doubleGameLoop(playerOne, playerTwo) {
+  console.log('start game (double player)');
 };
 
 singleBtn.addEventListener('click', singlePlayer);
