@@ -171,4 +171,18 @@ function displayWinner(winner) {
   body.insertBefore(winnerMsg, body.children[0]);
 };
 
-export { setupShips, attackPhase, updateMiniGrid, displayWinner };
+function displayActivePlayer(activePlayer) {
+  const activePlayerH2 = document.querySelector('.active-player');
+
+  if (activePlayerH2) {
+    activePlayerH2.innerText = `${activePlayer.name}`;
+  } else {
+    const h2 = document.createElement('h2');
+    h2.classList.add('active-player');
+    h2.innerText = `${activePlayer.name}`;
+    body.insertBefore(h2, body.children[0]);
+  };
+  
+};
+
+export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer };
