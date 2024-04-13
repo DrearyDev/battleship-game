@@ -10,6 +10,7 @@ import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
 import { setupShips, attackPhase, updateMiniGrid, displayWinner } from './handleDOM.js';
+import { displayActivePlayer } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
 import { submitCoords } from './submitBtn.js';
@@ -102,6 +103,8 @@ function checkForWinners(playerOne, playerTwo) {
 
     const grid = document.querySelector('.grid');
     grid.removeEventListener('click', gridClicked);
+  } else {
+    return false;
   };
 };
 
@@ -162,6 +165,7 @@ function doublePlayer() {
   playerTwo.name = 'Player Two';
 
   activePlayer = playerOne;
+  displayActivePlayer(activePlayer);
 
   resetBtn.addEventListener('click', resetBoard);
   placeRandomlyBtn.addEventListener('click', placeRandomly);
@@ -171,8 +175,10 @@ function doublePlayer() {
     if (activePlayer === playerOne) {
       resetBoard();
       activePlayer = playerTwo;
+      displayActivePlayer(activePlayer);
     } else {
       activePlayer = playerOne;
+      displayActivePlayer(activePlayer);
       doubleGameLoop(playerOne, playerTwo);
     };
   });
@@ -180,6 +186,11 @@ function doublePlayer() {
 
 function doubleGameLoop(playerOne, playerTwo) {
   console.log('start game (double player)');
+
+  console.log(checkForWinners(playerOne, playerTwo));
+  //while there is no winner...
+
+  console.log(activePlayer)
 };
 
 singleBtn.addEventListener('click', singlePlayer);
