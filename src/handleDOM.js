@@ -22,6 +22,32 @@ function createGrid() {
     body.appendChild(grid);
 };
 
+function updateGrid(playerBoard) {
+  const grid = document.querySelector('.grid');
+  const misses = playerBoard.misses.map(coords => [coords[0] + 1, coords[1] + 1]);
+  const hits = playerBoard.hits.map(coords => [coords[0] + 1, coords[1] + 1]);
+
+  for (let i = 0; i < misses.length; i++) {
+    const div = document.createElement('div');
+    div.classList.add('miss');
+
+    div.style.gridRow = [misses[i][0]];
+    div.style.gridColumn = [misses[i][1]];
+
+    grid.appendChild(div);
+  };
+
+  for (let i = 0; i < hits.length; i++) {
+    const div = document.createElement('div');
+    div.classList.add('hit');
+
+    div.style.gridRow = [hits[i][0]];
+    div.style.gridColumn = [hits[i][1]];
+
+    grid.appendChild(div);
+  };
+};
+
 function createShips() {
     const square = document.querySelector('.square');
     const squareWidth = getComputedStyle(square).getPropertyValue('--SQUARE_WIDTH').slice(0,-2);
@@ -205,4 +231,4 @@ function displayActivePlayer(activePlayer) {
   
 };
 
-export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid, clearMiniGrid };
+export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid, clearMiniGrid, updateGrid };
