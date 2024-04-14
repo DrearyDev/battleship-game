@@ -44,7 +44,8 @@ function playerAttack(e, defendingPlayer) {
 
 function cpuAttack(player) {
   player.playerBoard.recieveSmartAttack();
-  updateMiniGrid(player.playerBoard);
+  const miniGrid = document.querySelector('.mini-grid');
+  updateMiniGrid(player.playerBoard, miniGrid);
 };
 
 function changeMode() {
