@@ -257,10 +257,10 @@ function displayBothBoards(playerOne, playerTwo) {
   createMiniGrid();
 
   const playerOneH2 = document.createElement('h2');
-  playerOneH2.innerText = "Player One's Board:";
+  playerOneH2.innerText = `${playerOne.name}'s Board:`;
 
   const playerTwoH2 = document.createElement('h2');
-  playerTwoH2.innerText = "Player Two's Board:";
+  playerTwoH2.innerText = `${playerTwo.name}'s Board:`;
 
   const miniGrids = [...document.querySelectorAll('.mini-grid')]
 
