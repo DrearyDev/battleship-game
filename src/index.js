@@ -9,7 +9,7 @@ import './game.css';
 import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
-import { setupShips, attackPhase, updateMiniGrid, displayWinner, clearGrid, clearMiniGrid, passDevice, updateGrid } from './handleDOM.js';
+import { setupShips, attackPhase, updateMiniGrid, displayWinner, clearGrid, clearMiniGrid, passDevice, updateGrid, displayBothBoards } from './handleDOM.js';
 import { displayActivePlayer } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
@@ -216,11 +216,14 @@ function gridClickedDouble(e) {
       nextTurnBtn.addEventListener('click', (e) => {
         e.target.parentElement.remove();
         updateGrid(lastPlayer.playerBoard);
-        updateMiniGrid(activePlayer.playerBoard);
+        const miniGrid = document.querySelector('.mini-grid');
+        updateMiniGrid(activePlayer.playerBoard, miniGrid);
         displayActivePlayer(activePlayer);
       });
     } else {
       grid.removeEventListener('click', gridClickedDouble);
+      checkForWinners(playerOne, playerTwo);
+      displayBothBoards(playerOne, playerTwo);
     };
   };
 };
