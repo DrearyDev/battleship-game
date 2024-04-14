@@ -44,7 +44,10 @@ function setupBoardPhase() {
         };
 
         for (let i = 1; i < ship.coords.length; i++) {
-          if (grid.ships.has(ship.coords[i].toString())) { ship.style.borderColor = 'red' };
+          if (grid.ships.has(ship.coords[i].toString())) { ship.style.borderColor = 'red' }
+          else if (ship.coords[i][0] > 10 || ship.coords[i][1] > 10){
+            ship.style.borderColor = 'red';
+          };
         };
 
         calculateGridSet();
