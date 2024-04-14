@@ -251,4 +251,24 @@ function displayActivePlayer(activePlayer) {
   
 };
 
-export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid, clearMiniGrid, passDevice, updateGrid };
+function displayBothBoards(playerOne, playerTwo) {
+  resetBody();
+  createMiniGrid();
+  createMiniGrid();
+
+  const playerOneH2 = document.createElement('h2');
+  playerOneH2.innerText = "Player One's Board:";
+
+  const playerTwoH2 = document.createElement('h2');
+  playerTwoH2.innerText = "Player Two's Board:";
+
+  const miniGrids = [...document.querySelectorAll('.mini-grid')]
+
+  updateMiniGrid(playerOne.playerBoard, miniGrids[0]);
+  updateMiniGrid(playerTwo.playerBoard, miniGrids[1]);
+
+  body.insertBefore(playerOneH2, miniGrids[0]);
+  body.insertBefore(playerTwoH2, miniGrids[1]);
+};
+
+export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid, clearMiniGrid, passDevice, updateGrid, displayBothBoards };
