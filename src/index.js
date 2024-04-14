@@ -222,8 +222,8 @@ function gridClickedDouble(e) {
       });
     } else {
       grid.removeEventListener('click', gridClickedDouble);
-      checkForWinners(playerOne, playerTwo);
       displayBothBoards(playerOne, playerTwo);
+      checkForWinners(playerOne, playerTwo);
     };
   };
 };
