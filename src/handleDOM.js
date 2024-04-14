@@ -133,6 +133,16 @@ function attackPhase(player) {
 
 };
 
+function clearGrid() {
+  const gridChildren = [...document.querySelector('.grid').children];
+
+  gridChildren.forEach(child => {
+    if (!child.classList.contains('square')) {
+      child.remove();
+    };
+  });
+};
+
 function resetBody() {
   body.innerHTML = '';
   body.appendChild(header);
@@ -185,4 +195,4 @@ function displayActivePlayer(activePlayer) {
   
 };
 
-export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer };
+export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid };
