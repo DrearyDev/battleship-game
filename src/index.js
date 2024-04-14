@@ -118,6 +118,8 @@ function gridClickedSingle(e) {
 
     if (checkForWinners(grid.playerOne, grid.playerTwo)) {
       grid.removeEventListener('click', gridClickedSingle);
+      displayBothBoards(grid.playerOne, grid.playerTwo);
+      checkForWinners(grid.playerOne, grid.playerTwo);
     };
   };
 };
@@ -141,9 +143,9 @@ function singlePlayer() {
   const submitBtn = document.querySelector('.submit');
 
   const playerOne = player();
-  playerOne.name = 'player';
+  playerOne.name = 'Player';
   const cpu = player();
-  cpu.name = 'computer';
+  cpu.name = 'Computer';
 
   resetBtn.addEventListener('click', resetBoard);
   placeRandomlyBtn.addEventListener('click', placeRandomly);
