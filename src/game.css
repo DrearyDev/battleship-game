@@ -13,6 +13,8 @@
 
   --MISS_CROSS_COLOR: black;
   --HIT_CROSS_COLOR: red;
+
+  --MESSAGE_BG_COLOR: #fff;
 }
 
 * {
@@ -137,7 +139,7 @@ body {
   justify-content: center;
   gap: 10px;
 
-  background-color: white;
+  background-color: var(--MESSAGE_BG_COLOR);
   border: var(--GRID_BORDER);
 }
 
@@ -148,4 +150,20 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.pass-device {
+  width: 450px;
+  height: 450px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  position: absolute;
+
+  background-color: var(--MESSAGE_BG_COLOR);
+  border: var(--GRID_BORDER);
 }
