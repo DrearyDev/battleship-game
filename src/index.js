@@ -9,7 +9,7 @@ import './game.css';
 import { createShip } from './createShip.js';
 import { gameboard } from './gameboard.js';
 import { player } from './player.js';
-import { setupShips, attackPhase, updateMiniGrid, displayWinner } from './handleDOM.js';
+import { setupShips, attackPhase, updateMiniGrid, displayWinner, clearGrid, clearMiniGrid, passDevice, updateGrid } from './handleDOM.js';
 import { displayActivePlayer } from './handleDOM.js';
 import { resetBoard } from './resetBtn.js';
 import { placeRandomly } from './placeRandomlyBtn.js';
@@ -39,6 +39,7 @@ function playerAttack(e, defendingPlayer) {
   };
 
   grid.appendChild(div);
+  return div.classList[0];
 };
 
 function cpuAttack(player) {
@@ -103,12 +104,13 @@ function checkForWinners(playerOne, playerTwo) {
 
     const grid = document.querySelector('.grid');
     grid.removeEventListener('click', gridClicked);
+    return true;
   } else {
     return false;
   };
 };
 
-function gridClicked(e, playerOne, playerTwo) {
+function gridClicked(e) {
   const grid = document.querySelector('.grid');
 
   if (e.target === grid) {
@@ -178,19 +180,41 @@ function doublePlayer() {
       displayActivePlayer(activePlayer);
     } else {
       activePlayer = playerOne;
-      displayActivePlayer(activePlayer);
       doubleGameLoop(playerOne, playerTwo);
     };
   });
 };
 
 function doubleGameLoop(playerOne, playerTwo) {
-  console.log('start game (double player)');
+  let lastTurnStatus;
+  let lastPlayer;
+  attackPhase(activePlayer);
+  displayActivePlayer(activePlayer);
 
-  console.log(checkForWinners(playerOne, playerTwo));
-  //while there is no winner...
+  const grid = document.querySelector('.grid');
+  grid.addEventListener('click', (e) => {
 
-  console.log(activePlayer)
+    if (e.target === grid) {
+      lastPlayer = activePlayer;
+      activePlayer === playerOne ? activePlayer = playerTwo : activePlayer = playerOne;
+      lastTurnStatus = playerAttack(e, activePlayer);
+      clearGrid();
+      clearMiniGrid();
+
+      if (!checkForWinners(playerOne, playerTwo)) {
+        passDevice(activePlayer, lastTurnStatus);
+        const nextTurnBtn = document.querySelector('.start-turn');
+        nextTurnBtn.addEventListener('click', (e) => {
+          e.target.parentElement.remove();
+          updateGrid(lastPlayer.playerBoard);
+          updateMiniGrid(activePlayer.playerBoard);
+          displayActivePlayer(activePlayer);
+        });
+      } else {
+        console.log('test')
+      };
+    };
+  });
 };
 
 singleBtn.addEventListener('click', singlePlayer);
