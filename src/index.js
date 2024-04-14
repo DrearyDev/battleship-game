@@ -102,21 +102,22 @@ function checkForWinners(playerOne, playerTwo) {
       playAgain(gamemode);
     });
 
-    const grid = document.querySelector('.grid');
-    grid.removeEventListener('click', gridClicked);
     return true;
   } else {
     return false;
   };
 };
 
-function gridClicked(e) {
+function gridClickedSingle(e) {
   const grid = document.querySelector('.grid');
 
   if (e.target === grid) {
     playerAttack(e, grid.playerTwo);
     cpuAttack(grid.playerOne);
-    checkForWinners(grid.playerOne, grid.playerTwo);
+
+    if (checkForWinners(grid.playerOne, grid.playerTwo)) {
+      grid.removeEventListener('click', gridClickedSingle);
+    };
   };
 };
 
@@ -126,7 +127,7 @@ function singleGameLoop(playerOne, playerTwo) {
   const grid = document.querySelector('.grid');
   grid.playerOne = playerOne;
   grid.playerTwo = playerTwo;
-  grid.addEventListener('click', gridClicked);
+  grid.addEventListener('click', gridClickedSingle);
 };
 
 function singlePlayer() {
