@@ -186,35 +186,42 @@ function doublePlayer() {
 };
 
 function doubleGameLoop(playerOne, playerTwo) {
-  let lastTurnStatus;
-  let lastPlayer;
   attackPhase(activePlayer);
   displayActivePlayer(activePlayer);
 
   const grid = document.querySelector('.grid');
-  grid.addEventListener('click', (e) => {
+  grid.playerOne = playerOne;
+  grid.playerTwo = playerTwo;
+  grid.addEventListener('click', gridClickedDouble);
+};
 
-    if (e.target === grid) {
-      lastPlayer = activePlayer;
-      activePlayer === playerOne ? activePlayer = playerTwo : activePlayer = playerOne;
-      lastTurnStatus = playerAttack(e, activePlayer);
-      clearGrid();
-      clearMiniGrid();
+function gridClickedDouble(e) {
+  const grid = document.querySelector('.grid');
+  const playerOne = grid.playerOne;
+  const playerTwo = grid.playerTwo;
+  let lastPlayer;
+  let lastTurnStatus;
 
-      if (!checkForWinners(playerOne, playerTwo)) {
-        passDevice(activePlayer, lastTurnStatus);
-        const nextTurnBtn = document.querySelector('.start-turn');
-        nextTurnBtn.addEventListener('click', (e) => {
-          e.target.parentElement.remove();
-          updateGrid(lastPlayer.playerBoard);
-          updateMiniGrid(activePlayer.playerBoard);
-          displayActivePlayer(activePlayer);
-        });
-      } else {
-        console.log('test')
-      };
+  if (e.target === grid) {
+    lastPlayer = activePlayer;
+    activePlayer === playerOne ? activePlayer = playerTwo : activePlayer = playerOne;
+    lastTurnStatus = playerAttack(e, activePlayer);
+    clearGrid();
+    clearMiniGrid();
+
+    if (!checkForWinners(playerOne, playerTwo)) {
+      passDevice(activePlayer, lastTurnStatus);
+      const nextTurnBtn = document.querySelector('.start-turn');
+      nextTurnBtn.addEventListener('click', (e) => {
+        e.target.parentElement.remove();
+        updateGrid(lastPlayer.playerBoard);
+        updateMiniGrid(activePlayer.playerBoard);
+        displayActivePlayer(activePlayer);
+      });
+    } else {
+      grid.removeEventListener('click', gridClickedDouble);
     };
-  });
+  };
 };
 
 singleBtn.addEventListener('click', singlePlayer);
