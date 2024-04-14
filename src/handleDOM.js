@@ -125,6 +125,16 @@ function updateMiniGrid(playerBoard) {
   
 };
 
+function clearMiniGrid() {
+  const miniGridChildren = [...document.querySelector('.mini-grid').children];
+
+  miniGridChildren.forEach(child => {
+    if (!child.classList.contains('mini-square')) {
+      child.remove();
+    };
+  });
+};
+
 function attackPhase(player) {
   resetBody();
   createGrid();
@@ -195,4 +205,4 @@ function displayActivePlayer(activePlayer) {
   
 };
 
-export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid };
+export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid, clearMiniGrid };
