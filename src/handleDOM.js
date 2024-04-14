@@ -179,6 +179,26 @@ function clearGrid() {
   });
 };
 
+function passDevice(activePlayer, lastTurnStatus) {
+  
+  const div = document.createElement('div');
+  div.classList.add('pass-device');
+  const h1 = document.createElement('h1');
+  h1.innerText = `That was a ${lastTurnStatus}!`;
+  const h2 = document.createElement('h2');
+  h2.innerText = `Its ${activePlayer.name}'s Turn!`;
+
+  const startTurnBtn = document.createElement('button');
+  startTurnBtn.classList.add('start-turn');
+  startTurnBtn.innerText = 'Start Turn';
+
+  div.appendChild(h1);
+  div.appendChild(h2);
+  div.appendChild(startTurnBtn);
+
+  body.appendChild(div);
+};
+
 function resetBody() {
   body.innerHTML = '';
   body.appendChild(header);
@@ -231,4 +251,4 @@ function displayActivePlayer(activePlayer) {
   
 };
 
-export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid, clearMiniGrid, updateGrid };
+export { setupShips, attackPhase, updateMiniGrid, displayWinner, displayActivePlayer, clearGrid, clearMiniGrid, passDevice, updateGrid };
