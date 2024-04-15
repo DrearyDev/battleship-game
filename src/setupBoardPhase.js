@@ -62,8 +62,12 @@ function setupBoardPhase() {
       const ship = document.querySelector('.dragging');
       const rect = e.target.getBoundingClientRect();
 
-      const row = Math.round((e.clientY - rect.top) / 50);
-      const column = Math.round((e.clientX - rect.left) / 50);
+      let row = Math.ceil((e.clientY - rect.top) / 50);
+      let column = Math.ceil((e.clientX - rect.left) / 50);
+
+      if (row > 10) { row = 10 };
+      if (column > 10) { column = 10 };
+
       ship.style.gridRow = row;
       ship.style.gridColumn = column;
 
