@@ -50,7 +50,7 @@ function updateGrid(playerBoard) {
 
 function createShips() {
     const square = document.querySelector('.square');
-    const squareWidth = getComputedStyle(square).getPropertyValue('--SQUARE_WIDTH').slice(0,-2);
+    const squareWidth = getComputedStyle(square).getPropertyValue('width').slice(0,-2);
 
     const widths = [4,3,3,2,2,2,1,1,1,1];
     const ships = document.createElement('div');
