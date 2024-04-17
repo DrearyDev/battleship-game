@@ -49,7 +49,7 @@ function placeRandomly() {
   const grid = document.querySelector('.grid');
   const shipsContainer = document.querySelector('.ships');
   const square = document.querySelector('.square');
-  const squareWidth = getComputedStyle(square).getPropertyValue('--SQUARE_WIDTH').slice(0,-2);
+  const squareWidth = getComputedStyle(square).getPropertyValue('width').slice(0,-2);
 
   [...shipsContainer.children].forEach(ship => {
     const squaresTakenUp = ship.style.width.slice(0,-2) / squareWidth;
