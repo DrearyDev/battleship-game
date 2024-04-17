@@ -116,12 +116,13 @@ function gridClickedSingle(e) {
 
   if (e.target === grid) {
     playerAttack(e, grid.playerTwo);
-    cpuAttack(grid.playerOne);
 
     if (checkForWinners(grid.playerOne, grid.playerTwo)) {
       grid.removeEventListener('click', gridClickedSingle);
       displayBothBoards(grid.playerOne, grid.playerTwo);
       checkForWinners(grid.playerOne, grid.playerTwo);
+    } else {
+      cpuAttack(grid.playerOne);
     };
   };
 };
