@@ -152,9 +152,10 @@ function singlePlayer() {
   resetBtn.addEventListener('click', resetBoard);
   placeRandomlyBtn.addEventListener('click', placeRandomly);
   submitBtn.addEventListener('click', () => {
-    submitCoords(playerOne);
-    cpu.playerBoard.placeRandomShips();
-    singleGameLoop(playerOne, cpu);
+    if (submitCoords(playerOne)) {
+      cpu.playerBoard.placeRandomShips();
+      singleGameLoop(playerOne, cpu);
+    }
   });
 };
 
@@ -178,15 +179,15 @@ function doublePlayer() {
   resetBtn.addEventListener('click', resetBoard);
   placeRandomlyBtn.addEventListener('click', placeRandomly);
   submitBtn.addEventListener('click', () => {
-    submitCoords(activePlayer);
-
-    if (activePlayer === playerOne) {
-      resetBoard();
-      activePlayer = playerTwo;
-      displayActivePlayer(activePlayer);
-    } else {
-      activePlayer = playerOne;
-      doubleGameLoop(playerOne, playerTwo);
+    if (submitCoords(activePlayer)) {
+      if (activePlayer === playerOne) {
+        resetBoard();
+        activePlayer = playerTwo;
+        displayActivePlayer(activePlayer);
+      } else {
+        activePlayer = playerOne;
+        doubleGameLoop(playerOne, playerTwo);
+      };
     };
   });
 };
