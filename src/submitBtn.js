@@ -21,8 +21,10 @@ function submitCoords(player) {
       submitedCoords[i] = submitedCoords[i].map(coord => [coord[0]-1, coord[1]-1]);
       player.playerBoard.placeShip(submitedCoords[i]);
     };
+    return true;
   } else {
     console.log('not all ships placed validly');
+    return false;
   };
 };
 
