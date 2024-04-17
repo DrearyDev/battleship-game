@@ -22,12 +22,14 @@ const singleBtn = document.querySelector('#single');
 const doubleBtn = document.querySelector('#double');
 
 function playerAttack(e, defendingPlayer) {
+  const square = document.querySelector('.square');
+  const squareWidth = getComputedStyle(square).getPropertyValue('width').slice(0,-2);
   const grid = document.querySelector('.grid');
   const div = document.createElement('div');
   const rect = e.target.getBoundingClientRect();
 
-  const row = Math.ceil((e.clientY - rect.top) / 50);
-  const column = Math.ceil((e.clientX - rect.left) / 50);
+  const row = Math.ceil((e.clientY - rect.top) / squareWidth);
+  const column = Math.ceil((e.clientX - rect.left) / squareWidth);
 
   div.style.gridRow = row;
   div.style.gridColumn = column;
