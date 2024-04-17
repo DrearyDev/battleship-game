@@ -15,6 +15,8 @@
   --HIT_CROSS_COLOR: red;
 
   --MESSAGE_BG_COLOR: #fff;
+
+  --SIZE_MODIFIER: 1.6;
 }
 
 * {
@@ -166,4 +168,48 @@ body {
 
   background-color: var(--MESSAGE_BG_COLOR);
   border: var(--GRID_BORDER);
+}
+
+@media only screen and (max-width: 500px) {
+  :root {
+    --SIZE_MODIFIER: 1.6;
+  }
+
+  .grid {
+    width: calc(var(--GRID_WIDTH) / var(--SIZE_MODIFIER) + 1px);
+    height: calc(var(--GRID_WIDTH) / var(--SIZE_MODIFIER) + 1px);
+    grid-template-columns: repeat(10, calc(var(--SQUARE_WIDTH) / var(--SIZE_MODIFIER)));
+    grid-template-rows: repeat(10, calc(var(--SQUARE_WIDTH) / var(--SIZE_MODIFIER)));
+  }
+
+  .square {
+    width: calc(var(--SQUARE_WIDTH) / var(--SIZE_MODIFIER));
+    height: calc(var(--SQUARE_WIDTH) / var(--SIZE_MODIFIER));
+  }
+
+  .ships {
+    width: calc(var(--GRID_WIDTH) / var(--SIZE_MODIFIER));
+  }
+
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .miss, .hit {
+    width: calc(var(--SQUARE_WIDTH) / var(--SIZE_MODIFIER));
+    height: calc(var(--SQUARE_WIDTH) / var(--SIZE_MODIFIER));
+  }
+  .miss:before, .miss:after,
+  .hit:before, .hit:after {
+    height: 7px;
+  }
+
+  .winner-msg {
+    width: calc(var(--GRID_WIDTH) / var(--SIZE_MODIFIER) + 1px);
+  }
+
+  .pass-device {
+    width: calc(var(--GRID_WIDTH) / var(--SIZE_MODIFIER) + 1px);
+    height: calc(var(--GRID_WIDTH) / var(--SIZE_MODIFIER) + 1px);
+  }
 }
