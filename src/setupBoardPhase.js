@@ -20,10 +20,12 @@ function setupBoardPhase() {
     });
 
     ship.addEventListener('click', () => {
+      const square = document.querySelector('.square');
+      const squareWidth = getComputedStyle(square).getPropertyValue('width').slice(0,-2);
       const width = ship.style.width.slice(0,-2);
       const height = ship.style.height.slice(0,-2);
 
-      if (width > 50 || height > 50) {
+      if (+width > +squareWidth || +height > +squareWidth) {
         ship.style.height = `${width}px`;
         ship.style.width = `${height}px`;
       };
@@ -59,11 +61,13 @@ function setupBoardPhase() {
     e.preventDefault();
 
     if (e.target === grid) {
+      const square = document.querySelector('.square');
+      const squareWidth = getComputedStyle(square).getPropertyValue('width').slice(0,-2);
       const ship = document.querySelector('.dragging');
       const rect = e.target.getBoundingClientRect();
 
-      let row = Math.ceil((e.clientY - rect.top) / 50);
-      let column = Math.ceil((e.clientX - rect.left) / 50);
+      let row = Math.ceil((e.clientY - rect.top) / squareWidth);
+      let column = Math.ceil((e.clientX - rect.left) / squareWidth);
 
       if (row > 10) { row = 10 };
       if (column > 10) { column = 10 };
@@ -77,13 +81,13 @@ function setupBoardPhase() {
       ship.coords = [];
 
       if (+shipHeight > +shipWidth) {
-        let squaresShipTakesUp = +shipHeight / 50;
+        let squaresShipTakesUp = +shipHeight / squareWidth;
 
         for (let i = 0; i < squaresShipTakesUp; i++) {
           ship.coords.push([row+i, column]);
         };
       } else {
-        let squaresShipTakesUp = shipWidth / 50;
+        let squaresShipTakesUp = shipWidth / squareWidth;
 
         for (let i = 0; i < squaresShipTakesUp; i++) {
           ship.coords.push([row, column+i]);
